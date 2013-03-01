@@ -26,7 +26,7 @@ using namespace std;
 //    tree. (the root may change when we insert or delete)
 // -- the btree pointed to by 'root' is valid.
 void insert(btree* &root, int key) {
-
+	// TEST
 }
 
 // -------------------------------------------- R E M O V E ---------
