@@ -12,9 +12,17 @@
 
 
 #include "btree.h"
+#include "custom.h"
 
 using namespace std;
 
+void split (btree* &root, int key) {
+
+}
+
+void merge (btree* &root, int key) {
+
+}
 
 // -------------------------------------------- I N S E R T ---------
 //
@@ -26,7 +34,13 @@ using namespace std;
 //    tree. (the root may change when we insert or delete)
 // -- the btree pointed to by 'root' is valid.
 void insert(btree* &root, int key) {
-	// TEST
+	if (root->is_leaf == true) {
+		if (root->num_keys < 5) {
+			root->keys[root->num_keys] = key;
+		} else {
+			split(root, key);
+		}
+	}
 }
 
 // -------------------------------------------- R E M O V E ---------
