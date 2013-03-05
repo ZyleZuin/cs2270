@@ -13,7 +13,8 @@
 #define pq_struct_h
 
 struct pq {
-  // implement me
+  int priority;
+  int value;
 };
 
 #endif
