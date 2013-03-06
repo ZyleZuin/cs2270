@@ -19,8 +19,9 @@ using namespace std;
 struct pq {
   float priority;
   string text;
-  pq* &next;
-  pq* &previous;
+  pq* next;
+  pq* previous;
+  bool empty = false;
 };
 
 #endif

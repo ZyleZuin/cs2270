@@ -32,7 +32,13 @@
  *
  **/
 pq* init_priority_queue() {
-  // implement me
+	pq* q = new pq;
+	q->next = NULL;
+	q->previous = NULL;
+	q->priority = 0.0;
+	q->text = "";
+	q->empty = true;
+	return q;
 }
 
 /**
@@ -46,29 +52,41 @@ pq* init_priority_queue() {
  * Priority values may be negative, zero, or positive.
  **/
 void insert(pq* &queue, string &text, float priority) {
-	if (queue == NULL) {
-		pq new_pq = new pq;
-		new_pq->priority = priority;
-		new_pq->text = text;
-		new_pq->next = NULL;
-		new_pq->previous = NULL;
-	} else if (priority > queue->priority) {
-		pq* new_pq = new pq;
-		new_pq->priority = priority;
-		new_pq->text = text;
-		new_pq->next = queue;
-		new_pq->previous = queue->previous;
-		queue->previous = new_pq;
-		queue->previous->next = new_pq;
+	if (queue->empty == true) {
+		queue->text = text;
+		queue->priority = priority;
+		queue->empty = false;
 	} else {
-		if (queue->next != NULL) {
-			insert(queue->next, text, priority);
+		if (priority > queue->priority) {
+			if (queue->previous == NULL) {
+				pq* q = new pq;
+				q->next = queue->next;
+				q->previous = queue;
+				q->priority = queue->priority;
+				q->text = queue->text;
+				queue->priority = priority;
+				queue->text = text;
+				queue->next = q;
+			} else {
+				pq* q = new pq;
+				q->priority=priority;
+				q->text=text;
+				q->next = queue;
+				q->previous = queue->previous;
+				queue->previous->next = q;
+				queue->previous = q;
+			}
 		} else {
-			pq* new_pq = new pq;
-			new_pq->priority = priority;
-			new_pq->text = text;
-			new_pq->next = NULL;
-			new_pq->previous = queue;
+			if (queue->next != NULL) {
+				insert(queue->next, text, priority);
+			} else {
+				pq* q = new pq;
+				q->priority=priority;
+				q->text=text;
+				q->next =NULL;
+				q->previous = queue;
+				queue->next=q;
+			}
 		}
 	}
 }
