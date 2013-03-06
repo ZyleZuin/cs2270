@@ -20,6 +20,7 @@ struct pq {
   float priority;
   string text;
   pq* &next;
+  pq* &previous;
 };
 
 #endif

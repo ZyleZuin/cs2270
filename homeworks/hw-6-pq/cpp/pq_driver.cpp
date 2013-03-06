@@ -17,9 +17,14 @@ using namespace Thilenius;
 
 SUITE_BEGIN("Priority Queue")
 
-TEST_BEGIN("SanityCheck")
+TEST_BEGIN("Insert")
 {
-  IsTrue("Sane?", true, "OK I'm insane");
+	pq* my_que = new pq;
+  IsTrue("Insert", peek(my_que) == NULL, "Empty Queue");
+  insert(my_que, "Black", 3);
+  IsTrue("Insert", peek(my_que) == "Black", "Empty Queue");
+  insert(my_que, "Brown", 5);
+  IsTrue("Insert", peek(my_que) == "Brown", "Empty Queue");
 }TEST_END
 
 SUITE_END
