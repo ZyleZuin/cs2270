@@ -15,6 +15,8 @@
 #include <string>
 #include "pq.h"
 
+
+
 void insert(pq* &queue, string &text, float priority) {
   // implement me
 }

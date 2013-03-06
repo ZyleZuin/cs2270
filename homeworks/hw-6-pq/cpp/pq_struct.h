@@ -12,9 +12,14 @@
 #ifndef pq_struct_h
 #define pq_struct_h
 
+#include <string>
+
+using namespace std;
+
 struct pq {
-  int priority;
-  int value;
+  float priority;
+  string text;
+  pq* &next;
 };
 
 #endif
