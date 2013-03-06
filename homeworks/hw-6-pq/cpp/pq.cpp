@@ -16,7 +16,7 @@
 
 void insert(pq* &queue, string &text, float priority) {
 	if (queue == NULL) {
-		pq* new_pq = new pq;
+		pq new_pq = new pq;
 		new_pq->priority = priority;
 		new_pq->text = text;
 		new_pq->next = NULL;
