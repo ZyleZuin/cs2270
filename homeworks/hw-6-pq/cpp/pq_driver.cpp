@@ -21,9 +21,11 @@ TEST_BEGIN("Insert")
 {
 	pq* my_que = new pq;
   IsTrue("Insert", peek(my_que) == NULL, "Empty Queue");
-  insert(my_que, "Black", 3);
+  string text = "Black";
+  insert(my_que, text, 3.0);
   IsTrue("Insert", peek(my_que) == "Black", "Empty Queue");
-  insert(my_que, "Brown", 5);
+  text = "Brown";
+  insert(my_que, text, 5.0);
   IsTrue("Insert", peek(my_que) == "Brown", "Empty Queue");
 }TEST_END
 
