@@ -10,6 +10,8 @@
 //
 // The test code will appear on RetroGrade late in the game.
 
+#include <string>
+#include <iostream>
 #include "UTFramework.h"
 #include "pq.h"
 
@@ -35,11 +37,19 @@ TEST_BEGIN("Everything")
   text = "Medical Packet";
   insert(queue, text, 11.5);
   text = peek(queue);
+<<<<<<< HEAD
   IsTrue("Peek OK", text == "Medical Packet", "Robot surgeon asleep at the wheel?");
   text = "Medical Packet";
   insert(queue, text, 12.5);
   text = peek(queue);
   IsTrue("Peek OK", text == "Medical Packet", "Robot surgeon asleep at the wheel?");
+=======
+  IsTrue("Peek OK", text == "Medical Packet", "Robot surgeon asleep at the wheel?");  
+  text = "Medical Packet";
+  insert(queue, text, 12.5);
+  text = peek(queue);
+  IsTrue("Peek OK", text == "Medical Packet", "Robot surgeon asleep at the wheel?");  
+>>>>>>> 00c5378b34b2a92fcf9a790e9955906f94a90c21
   text = "Cat Video";
   insert(queue, text, 3);
   text = peek(queue);
@@ -58,6 +68,7 @@ TEST_BEGIN("Everything")
   text = remove(queue);
   IsTrue("Remove OK", text == "Medical Packet", "Remove not working");
   text = peek(queue);
+<<<<<<< HEAD
   IsTrue("Peek OK", text == "RTS Game Packet", "Game Packet Not Found");
   text = remove(queue);
   IsTrue("Remove OK", text == "RTS Game Packet", "Remove not working");
@@ -65,9 +76,19 @@ TEST_BEGIN("Everything")
   IsTrue("Remove OK", text == "Cat Video", "Remove not working");
   text = remove(queue);
   IsTrue("Remove OK", text == "Cat Video", "Remove not working");
+=======
+  IsTrue("Peek OK", text == "RTS Game Packet", "Game Packet Not Found");  
+  text = remove(queue);
+  IsTrue("Remove OK", text == "RTS Game Packet", "Remove not working");  
+  text = remove(queue);
+  IsTrue("Remove OK", text == "Cat Video", "Remove not working");  
+  text = remove(queue);
+  IsTrue("Remove OK", text == "Cat Video", "Remove not working");  
+>>>>>>> 00c5378b34b2a92fcf9a790e9955906f94a90c21
   text = remove(queue);
   IsTrue("Remove OK", text == "PingAlive", "Remove not working");
 }TEST_END
+
 
 SUITE_END
 
