@@ -13,7 +13,6 @@
 #include <iostream>
 #include <string>
 #include <set>
-#include <queue>
 #include "graph.hpp"
 
 using namespace std;
@@ -115,30 +114,40 @@ void Graph::dfs(Node& start) {
 	int disco_time;
 	int finish_time;
 	int bfs_rank;
-	clock++;
-	start.setColor(GRAY, clock);
-	for (size_t i = 0; i < edges.size(); i++) {
-		Edge* edge = edges[i];
-		if (edge->getStart() == &start) {
-			Node* other_node = edge->getEnd();
+	vector<Edge*> my_edges;
 
-			other_node->getDiscoveryInformation(color, disco_time, finish_time,
-					bfs_rank);
-			if (color == GRAY) {
-				edge->setType(BACK_EDGE);
-			} else if (color == BLACK) {
-				if (edge->getEnd()->isAncestor(start) == true) {
-					edge->setType(FORWARD_EDGE);
-				} else {
-					edge->setType(CROSS_EDGE);
-				}
-			} else if (color == WHITE) {
-				other_node->setPredecessor(start);
-				edge->setType(TREE_EDGE);
-				dfs(*other_node);
+	clock++;
+	start.getDiscoveryInformation(color, disco_time, finish_time, bfs_rank);
+
+	if (color == WHITE) {
+		start.setColor(GRAY, clock);
+		for (size_t i = 0; i < edges.size(); i++) {
+			Edge* edge = edges[i];
+			if (edge->getStart() == &start) {
+				edge->getEnd()->setPredecessor(start);
+				my_edges.push_back(edges[i]);
 			}
 		}
 	}
+	for (size_t i = 0; my_edges.size(); i++) {
+		Edge* edge = my_edges.back();
+		my_edges.pop_back();
+		edge->getEnd()->getDiscoveryInformation(color, disco_time, finish_time,
+				bfs_rank);
+		if (color == GRAY) {
+			edge->setType(BACK_EDGE);
+		} else if (color == BLACK) {
+			if (edge->getStart()->isAncestor(*edge->getEnd()) == true) {
+				edge->setType(FORWARD_EDGE);
+			} else {
+				edge->setType(CROSS_EDGE);
+			}
+		} else if (color == WHITE) {
+			edge->setType(TREE_EDGE);
+			dfs(*edge->getEnd());
+		}
+	}
+
 	clock++;
 	start.setColor(BLACK, clock);
 }
@@ -148,34 +157,7 @@ void Graph::dfs(Node& start, Node& finish) {
 }
 
 void Graph::bfs(Node& start) {
-	int color = 0;
-	int disco_time =0;
-	int finish_time =0;
-	int bfs_rank =0;
-	queue<Node*> queue;
-	clock = 0;
-	queue.push(&start);
-	start.setColor(GRAY, clock);
-	start.setRank(0);
-	clock++;
-	while (queue.size() != 0) {
-		Node* node = queue.front();
-		queue.pop();
-		for (size_t i = 0; i < edges.size(); i++) {
-			Edge* edge = edges[i];
-			if (edge->getStart() == node) {
-				edge->getEnd()->getDiscoveryInformation(color, disco_time,
-						finish_time, bfs_rank);
-				if (color == WHITE) {
-					edge->getStart()->getDiscoveryInformation(color, disco_time,
-							finish_time, bfs_rank);
-					edge->getEnd()->setRank(bfs_rank + 1);
-					queue.push(edge->getEnd());
-				}
-			}
-		}
-		node->setColor(BLACK, clock);
-	}
+// implement me. see header file for info.
 }
 
 void Graph::bfs(Node& start, Node& finish) {
@@ -236,9 +218,7 @@ void Node::getDiscoveryInformation(int& color, int& disco_time,
 bool Node::isAncestor(Node& other) {
 	if (this->predecessor == &other) {
 		return true;
-	} else if (this->predecessor != NULL
-			and this->predecessor->isAncestor(other))
-		return true;
+	}
 	return false;
 }
 
