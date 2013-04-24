@@ -188,7 +188,7 @@ TEST_BEGIN("Add States")
   FSM fsm;
   int even = fsm.addState("even", true);
   int odd = fsm.addState("odd");
-  IsTrue("Non-Negative IDs", (even >= 0 && odd >= 0), 
+  IsTrue("Non-Negative IDs", (even >= 0 && odd >= 0),
 	 "FSM assigned negative ID to state");
   IsTrue("Non-equal IDs", even != odd, "FSM assigned same ID to two states");
   int current = fsm.getCurrentState();
@@ -210,13 +210,13 @@ TEST_BEGIN("Add Transitions")
   FSM fsm;
   int start = fsm.addState("No Input");
   int m1 = fsm.addState("M");
-  int o1 = fsm.addState("O"); 
+  int o1 = fsm.addState("O");
   int o2 = fsm.addState("O");
   int n1 = fsm.addState("N");
   int m2 = fsm.addState("M");
   int a1 = fsm.addState("A");
   int n2 = fsm.addState("N", true);
-  
+
   int start_tr = fsm.addTransition(start, m1, (int) 'M', "M"); // 1
   Transition* tr = fsm.getTransition(start_tr);
   IsTrue("Null", tr != NULL, "Transition just added is NULL");
@@ -239,7 +239,7 @@ TEST_BEGIN("Add Transitions")
     IsTrue("Count Transitions", num_trans == 7, "Wrong number of transitions");
     fsm.addTransition(n1, m2, (int) 'M', "M"); // still 7
     num_trans = fsm.countTransitions();
-    IsTrue("Count Transitions", num_trans == 7, "Wrong number of transitions");  
+    IsTrue("Count Transitions", num_trans == 7, "Wrong number of transitions");
   }
 }TEST_END
 
@@ -247,7 +247,6 @@ TEST_BEGIN("Simple Signals")
 {
   FSM fsm = fsm_simple(); // accepts even numbers of zeros
   int def = fsm.getDefaultState();
-  State* st;
   bool went;
   bool acc;
   went = fsm.handleSignal(1);
@@ -319,7 +318,7 @@ TEST_BEGIN("MOONMAN")
   went = moonman.handleSignal((int) '#');
   IsTrue("Went", !went, "Should not transition on weirdo signals");
   IsTrue("Accepting", !moonman.isAcceptState(), "Shouldn't accept yet");
-  
+
 }TEST_END
 
 TEST_BEGIN("BRAIN BAG")
