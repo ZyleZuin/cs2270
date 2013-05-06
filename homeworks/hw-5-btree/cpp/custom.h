@@ -5,7 +5,13 @@
 
 using namespace std;
 
-void split(btree* &root, int key);
+void sort_keys(btree* &root);
+
+bool check_key(btree* &root, int key);
+
+void swap(int*a, int*b);
+
+void split(btree* &root);
 
 void merge(btree* &root, int key);
 

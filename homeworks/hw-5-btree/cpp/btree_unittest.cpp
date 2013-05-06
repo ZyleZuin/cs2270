@@ -1,5 +1,6 @@
 #include "UTFramework.h"
 #include "btree_unittest_help.h"
+#include "custom.h"
 
 using namespace Thilenius;
 
