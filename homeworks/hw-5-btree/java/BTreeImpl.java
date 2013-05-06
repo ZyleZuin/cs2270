@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class BTreeImpl extends BTree {
 
 	public BTreeImpl(int order) {
@@ -8,11 +10,11 @@ public class BTreeImpl extends BTree {
 		
 	}
 	
-	public void sort(int[] arr) {
+	public void sort(int[] arr, int x) {
 		boolean notDone = true;
 		while (notDone) {
 			notDone = false;
-			for (int i = 0; i<arr.length-1; i++) {
+			for (int i = 0; i<x; i++) {
 				if(arr[i] > arr[i+1]) {
 					int temp = arr[i];
 					arr[i]=arr[i+1];
@@ -33,7 +35,9 @@ public class BTreeImpl extends BTree {
 		// Inserts if root is a leaf
 		if (root.isLeaf) {
 			root.getKeys()[root.numKeys] = key;
-			sort(root.getKeys());
+			System.out.println(Arrays.toString(root.keys));
+			sort(root.getKeys(), root.numKeys);
+			System.out.println(Arrays.toString(root.keys));
 			root.numKeys++;
 			if (root.numKeys == 5) {
 				split(root);
@@ -62,7 +66,7 @@ public class BTreeImpl extends BTree {
 		}
 		if (curNode.isLeaf) {
 			curNode.getKeys()[curNode.numKeys] = key;
-			sort(curNode.getKeys());
+			sort(curNode.getKeys(), curNode.numKeys);
 			curNode.numKeys++;
 			if (curNode.numKeys == 5) {
 				split(curNode);
